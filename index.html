@@ -1,0 +1,218 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#e94e9b">
+<title>HeartLens — Couple Connection Test</title>
+<style>
+:root{--pink:#f04e9b;--pink2:#ff8fbd;--purple:#7954d9;--ink:#302342;--muted:#766b84;--card:rgba(255,255,255,.91)}
+*{box-sizing:border-box}body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;color:var(--ink);background:radial-gradient(circle at 5% 5%,#ffe0ef 0,transparent 32%),radial-gradient(circle at 95% 15%,#e7ddff 0,transparent 32%),linear-gradient(135deg,#fff8fc,#f8f4ff);min-height:100vh}
+header{padding:18px 16px;text-align:center}.brand{font-weight:850;font-size:1.1rem;letter-spacing:.2px}.brand span{color:var(--pink)}.lang{font-size:.82rem;color:var(--muted);margin-top:4px}
+main{width:min(760px,100%);padding:8px 14px 36px;margin:auto}.card{background:var(--card);border:1px solid #fff;box-shadow:0 12px 36px #8c59a51a;border-radius:24px;padding:clamp(18px,4vw,30px);margin:12px 0}
+.hero{text-align:center;padding:30px 20px;background:linear-gradient(145deg,#fff,#fff2fa)}.heart{font-size:2.5rem}.hero h1{font-size:clamp(1.8rem,6vw,3rem);line-height:1.08;margin:8px 0 12px;background:linear-gradient(90deg,var(--pink),var(--purple));color:transparent;background-clip:text}.sub{color:var(--muted);line-height:1.6}
+h2{font-size:1.3rem;margin:0 0 8px}h3{font-size:1.05rem;margin:0 0 8px}.field{margin:15px 0}label{display:block;font-weight:700;font-size:.93rem;margin-bottom:7px}input,textarea,select{width:100%;border:1px solid #e6d8ef;border-radius:13px;padding:13px 14px;font:inherit;color:var(--ink);background:#fff;outline:none}input:focus,textarea:focus{border-color:var(--pink);box-shadow:0 0 0 3px #f04e9b20}textarea{min-height:100px;resize:vertical}
+button,.button{border:0;border-radius:14px;padding:13px 18px;background:linear-gradient(100deg,var(--pink),var(--purple));color:#fff;font-weight:800;font-size:.98rem;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:46px}button:disabled{opacity:.5;cursor:not-allowed}.secondary{background:#f6edf9;color:var(--purple);border:1px solid #e9d8f5}.full{width:100%}.row{display:flex;gap:10px;flex-wrap:wrap}.row>*{flex:1}.hidden{display:none!important}.pill{display:inline-block;background:#fce7f3;color:#a52a70;border-radius:99px;padding:6px 11px;font-size:.8rem;font-weight:750}
+.progress{height:7px;background:#eee6f4;border-radius:99px;overflow:hidden;margin:15px 0}.progress div{height:100%;background:linear-gradient(90deg,var(--pink),var(--purple));width:0;transition:width .2s}
+.question{font-size:1.12rem;font-weight:800;line-height:1.45;margin:14px 0}.opts{display:grid;gap:9px}.opt{display:flex;gap:10px;align-items:flex-start;padding:12px;border:1px solid #eadff1;border-radius:14px;background:#fff;cursor:pointer}.opt input{width:auto;margin-top:4px;accent-color:var(--pink)}.opt:has(input:checked){border-color:var(--pink);background:#fff3f9}
+.notice{background:#fff4d8;color:#72501a;border-radius:13px;padding:12px;font-size:.88rem;line-height:1.5}.status{color:var(--muted);font-size:.9rem}.scoregrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.metric{padding:16px;border-radius:17px;background:linear-gradient(135deg,#fff2f9,#f1ecff)}.metric strong{display:block;font-size:1.55rem;color:var(--purple)}.metric small{color:var(--muted)}.answerbox{border:1px solid #eee2f4;border-radius:15px;padding:14px;margin:10px 0;background:#fff}.answerbox p{white-space:pre-wrap;line-height:1.55;margin:6px 0}.muted{color:var(--muted)}.footer{text-align:center;font-size:.8rem;color:var(--muted);padding:8px 16px 24px}
+@media(max-width:480px){.row{flex-direction:column}.scoregrid{grid-template-columns:1fr 1fr}.card{border-radius:20px}.hero{padding:24px 16px}}
+</style>
+</head>
+<body>
+<header><div class="brand">💗 Heart<span>Lens</span></div><div class="lang">Real feelings. Honest answers. · സത്യസന്ധമായ ഉത്തരങ്ങൾ</div></header>
+<main>
+<section id="setup" class="card hero">
+<div class="heart">💞</div><h1>True Love or<br>Couple Connection?</h1>
+<p class="sub">Understand each other better — one honest answer at a time.<br>പരസ്പരം കൂടുതൽ മനസ്സിലാക്കാം, സത്യസന്ധമായ ഉത്തരങ്ങളിലൂടെ.</p>
+<div class="notice" style="text-align:left;margin:18px 0">This is a reflection quiz, not a scientific test of whether love is “true” or “fake”. Results show answer patterns, not a final verdict.</div>
+<div class="field" style="text-align:left"><label for="nameA">Your name / നിങ്ങളുടെ പേര്</label><input id="nameA" maxlength="50" placeholder="e.g. Anu"></div>
+<div class="field" style="text-align:left"><label for="nameB">Partner's name / പങ്കാളിയുടെ പേര്</label><input id="nameB" maxlength="50" placeholder="e.g. Arun"></div>
+<div class="field" style="text-align:left"><label for="duration">Relationship duration / ബന്ധത്തിന്റെ കാലയളവ് (optional)</label><input id="duration" maxlength="50" placeholder="e.g. 8 months / 8 മാസം"></div>
+<button id="createBtn" class="full">Create our private link · Link ഉണ്ടാക്കുക</button>
+<p id="setupStatus" class="status"></p>
+</section>
+
+<section id="room" class="card hidden">
+<span class="pill">YOUR COUPLE ROOM</span><h2 id="roomTitle">Your link is ready 💌</h2>
+<p class="sub">Share this link with your partner. Each person answers privately. Results unlock only after both submit.</p>
+<div class="field"><label>Share link / പങ്കിടാനുള്ള ലിങ്ക്</label><input id="shareUrl" readonly></div>
+<div class="row"><button id="copyBtn" class="full">Copy link</button><button id="shareBtn" class="secondary full">Share…</button></div>
+<p id="roomStatus" class="status"></p>
+<div id="joinPanel" class="hidden" style="margin-top:20px">
+<h3>Who is answering? / ആരാണ് ഉത്തരം നൽകുന്നത്?</h3>
+<div class="field"><label for="participant">Choose your name</label><select id="participant"></select></div>
+<button id="startBtn" class="full">Start the questions →</button>
+</div>
+</section>
+
+<section id="quiz" class="card hidden">
+<div class="row" style="align-items:center"><span id="whoPill" class="pill">PARTNER</span><span id="counter" class="status" style="text-align:right">Question 1</span></div>
+<div class="progress"><div id="progressBar"></div></div>
+<div id="questionArea"></div>
+<div class="row" style="margin-top:18px"><button id="backBtn" class="secondary">← Back</button><button id="nextBtn" class="full">Next →</button></div>
+<p id="quizStatus" class="status"></p>
+</section>
+
+<section id="waiting" class="card hidden hero">
+<div class="heart">💌</div><h2>Answers saved!</h2>
+<p class="sub">നിന്റെ ഉത്തരങ്ങൾ save ചെയ്തു. Your partner must also submit before the results can be revealed.</p>
+<p id="waitingStatus" class="status"></p>
+<button id="refreshBtn" class="full">Check for results ↻</button>
+</section>
+
+<section id="results" class="card hidden">
+<div class="hero" style="border-radius:18px"><div class="heart">💗</div><h2 id="resultTitle">Your connection report</h2><p class="sub">A conversation starter, not a verdict.</p></div>
+<div class="scoregrid" style="margin:16px 0">
+<div class="metric"><small>Answer alignment</small><strong id="alignScore">—</strong><small>ഉത്തരങ്ങളിലെ പൊരുത്തം</small></div>
+<div class="metric"><small>Both completed</small><strong>2 / 2</strong><small>രണ്ടുപേരും പൂർത്തിയാക്കി</small></div>
+</div>
+<p class="sub">Alignment compares the multiple-choice answers you both gave. It does not measure love, loyalty, or a person's worth.</p>
+<div id="resultDetails"></div>
+<button id="copyReportBtn" class="full">Copy report text</button>
+<button id="resetViewBtn" class="secondary full" style="margin-top:9px">Back to room</button>
+</section>
+</main>
+<div class="footer">Made with care 💗 · സ്വകാര്യത: പങ്കിടുന്ന ലിങ്ക് കൈവശമുള്ളവർക്ക് ഈ room-ൽ പ്രവേശിക്കാനാകാം.</div>
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import { getDatabase, ref, get, set, update, onValue } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
+import { getAuth, signInAnonymously } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+
+/* SETUP REQUIRED: paste your Firebase project's web config below. */
+const firebaseConfig = {
+  apiKey: "PASTE_API_KEY",
+  authDomain: "PASTE_PROJECT_ID.firebaseapp.com",
+  databaseURL: "https://PASTE_PROJECT_ID-default-rtdb.firebaseio.com",
+  projectId: "PASTE_PROJECT_ID",
+  appId: "PASTE_APP_ID"
+};
+
+const questions = [
+ {type:"choice",cat:"Emotional safety",en:"When I feel upset, my partner tries to understand me.",ml:"എനിക്ക് വിഷമം തോന്നുമ്പോൾ partner എന്നെ മനസ്സിലാക്കാൻ ശ്രമിക്കുന്നു.",opts:["Almost always / മിക്കപ്പോഴും","Sometimes / ചിലപ്പോൾ","Rarely / അപൂർവ്വമായി","Not sure / ഉറപ്പില്ല"]},
+ {type:"choice",cat:"Communication",en:"I can tell my partner how I really feel without being mocked or punished.",ml:"പരിഹസിക്കപ്പെടുമെന്നോ ശിക്ഷിക്കപ്പെടുമെന്നോ ഭയമില്ലാതെ എനിക്ക് എന്റെ വികാരങ്ങൾ പറയാം.",opts:["Yes, comfortably / അതെ","Sometimes / ചിലപ്പോൾ","It feels difficult / ബുദ്ധിമുട്ടാണ്","Not sure / ഉറപ്പില്ല"]},
+ {type:"choice",cat:"Trust",en:"We respect each other's boundaries and personal space.",ml:"ഞങ്ങൾ പരസ്പരം boundaries-ഉം personal space-ഉം മാനിക്കുന്നു.",opts:["Almost always / മിക്കപ്പോഴും","Sometimes / ചിലപ്പോൾ","Rarely / അപൂർവ്വമായി","Not sure / ഉറപ്പില്ല"]},
+ {type:"choice",cat:"Conflict repair",en:"After a disagreement, we try to repair the connection instead of only blaming.",ml:"വഴക്കിന് ശേഷം കുറ്റപ്പെടുത്തുന്നതിനു പകരം പ്രശ്നം പരിഹരിക്കാൻ ഞങ്ങൾ ശ്രമിക്കുന്നു.",opts:["Almost always / മിക്കപ്പോഴും","Sometimes / ചിലപ്പോൾ","Rarely / അപൂർവ്വമായി","Not sure / ഉറപ്പില്ല"]},
+ {type:"choice",cat:"Care",en:"My partner remembers small things that matter to me.",ml:"എനിക്ക് പ്രധാനപ്പെട്ട ചെറിയ കാര്യങ്ങൾ പോലും partner ഓർക്കാറുണ്ട്.",opts:["Often / പലപ്പോഴും","Sometimes / ചിലപ്പോൾ","Rarely / അപൂർവ്വമായി","Not sure / ഉറപ്പില്ല"]},
+ {type:"choice",cat:"Independence",en:"I can have friends, interests and time alone without guilt or pressure.",ml:"കുറ്റബോധമോ സമ്മർദ്ദമോ ഇല്ലാതെ സുഹൃത്തുക്കളും താൽപര്യങ്ങളും സ്വന്തം സമയവും എനിക്ക് ഉണ്ടാകാം.",opts:["Yes / അതെ","Sometimes / ചിലപ്പോൾ","No / ഇല്ല","Not sure / ഉറപ്പില്ല"]},
+ {type:"choice",cat:"Emotional support",en:"When life gets hard, I feel we can face it as a team.",ml:"ജീവിതം ബുദ്ധിമുട്ടാകുമ്പോൾ ഞങ്ങൾ ഒരുമിച്ച് നേരിടുമെന്ന് എനിക്ക് തോന്നുന്നു.",opts:["Strongly agree / പൂർണ്ണമായി യോജിക്കുന്നു","Somewhat agree / കുറച്ച് യോജിക്കുന്നു","Disagree / യോജിക്കുന്നില്ല","Not sure / ഉറപ്പില്ല"]},
+ {type:"choice",cat:"Honesty",en:"We can admit mistakes and apologise sincerely.",ml:"ഞങ്ങൾക്ക് തെറ്റുകൾ സമ്മതിക്കാനും ആത്മാർത്ഥമായി ക്ഷമ ചോദിക്കാനും കഴിയും.",opts:["Almost always / മിക്കപ്പോഴും","Sometimes / ചിലപ്പോൾ","Rarely / അപൂർവ്വമായി","Not sure / ഉറപ്പില്ല"]},
+ {type:"choice",cat:"Being understood",en:"My partner understands what helps me feel loved.",ml:"എനിക്ക് സ്നേഹം അനുഭവപ്പെടാൻ എന്താണ് സഹായിക്കുന്നതെന്ന് partner മനസ്സിലാക്കുന്നു.",opts:["Yes / അതെ","Partly / ഭാഗികമായി","Not yet / ഇതുവരെ ഇല്ല","Not sure / ഉറപ്പില്ല"]},
+ {type:"choice",cat:"Future",en:"We can talk respectfully about what we each want in the future.",ml:"ഭാവിയെക്കുറിച്ച് ഞങ്ങളുടെ ആഗ്രഹങ്ങൾ ബഹുമാനത്തോടെ സംസാരിക്കാൻ കഴിയും.",opts:["Yes / അതെ","Somewhat / കുറച്ച്","It is difficult / ബുദ്ധിമുട്ടാണ്","Not sure / ഉറപ്പില്ല"]},
+ {type:"text",key:"disliked",en:"What is one behaviour of mine that you find difficult or dislike? Please describe it kindly and specifically.",ml:"എന്റെ ഏത് സ്വഭാവമാണ് നിനക്ക് ബുദ്ധിമുട്ടോ ഇഷ്ടക്കുറവോ ഉണ്ടാക്കുന്നത്? കുറ്റപ്പെടുത്താതെ വ്യക്തമായി എഴുതുക.",placeholder:"I feel hurt when… / …ചെയ്യുമ്പോൾ എനിക്ക് വിഷമം തോന്നുന്നു"},
+ {type:"text",key:"attractive",en:"What qualities in your partner do you find most attractive or meaningful?",ml:"Partner-ന്റെ ഏത് ഗുണങ്ങളാണ് നിനക്ക് ഏറ്റവും ആകർഷകമോ വിലപ്പെട്ടതോ?",placeholder:"I admire your… / നിന്റെ … എനിക്ക് ഇഷ്ടമാണ്"},
+ {type:"text",key:"special",en:"What is your most special moment together, and why does it matter to you?",ml:"നിങ്ങൾ ഒരുമിച്ചുള്ള ഏറ്റവും special moment ഏതാണ്? അത് നിനക്ക് പ്രധാനമാകുന്നത് എന്തുകൊണ്ട്?",placeholder:"One moment I will remember is…"},
+ {type:"text",key:"need",en:"What is one thing you wish your partner understood better about you?",ml:"നിന്നെക്കുറിച്ച് partner കൂടുതൽ മനസ്സിലാക്കണമെന്ന് നീ ആഗ്രഹിക്കുന്ന ഒരു കാര്യം എന്താണ്?",placeholder:"I wish you understood…"},
+ {type:"text",key:"message",en:"Write a message you want your partner to read when the results are revealed.",ml:"Results കാണുമ്പോൾ partner വായിക്കണമെന്ന് നീ ആഗ്രഹിക്കുന്ന ഒരു സന്ദേശം എഴുതുക.",placeholder:"Dear…"}
+];
+
+const $ = id => document.getElementById(id);
+const sections = ["setup","room","quiz","waiting","results"];
+function show(id){sections.forEach(s=>$(s).classList.toggle("hidden",s!==id));}
+function escapeHtml(s){return String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));}
+function roomId(){return crypto.randomUUID().replaceAll("-","").slice(0,20);}
+let app,db,auth,roomKey,roomData,participant,answers={},qIndex=0,unsubscribe=null;
+const urlRoom=new URLSearchParams(location.search).get("room");
+const configured=!firebaseConfig.apiKey.startsWith("PASTE_") && !firebaseConfig.projectId.startsWith("PASTE_");
+
+async function initFirebase(){
+ if(!configured) throw new Error("Firebase setup is needed. Follow README.md and add your config to index.html.");
+ app=initializeApp(firebaseConfig); db=getDatabase(app); auth=getAuth(app); await signInAnonymously(auth);
+}
+async function loadRoom(key){
+ roomKey=key;
+ const snap=await get(ref(db,"rooms/"+key));
+ if(!snap.exists()) throw new Error("This couple link was not found. Ask the creator for a new link.");
+ roomData=snap.val(); $("roomTitle").textContent=`${roomData.nameA} 💗 ${roomData.nameB}`;
+ $("shareUrl").value=location.origin+location.pathname+"?room="+key;
+ $("participant").innerHTML=`<option value="">Choose… / തിരഞ്ഞെടുക്കുക</option><option value="A">${escapeHtml(roomData.nameA)} (You)</option><option value="B">${escapeHtml(roomData.nameB)} (Partner)</option>`;
+ $("joinPanel").classList.remove("hidden"); $("roomStatus").textContent="Both people must submit to reveal the report. / രണ്ടുപേരും submit ചെയ്യണം.";
+ show("room");
+ if(unsubscribe) unsubscribe();
+ unsubscribe=onValue(ref(db,"rooms/"+key),snap2=>{if(snap2.exists()){roomData=snap2.val();if(roomData.answers?.A && roomData.answers?.B && roomData.answers.A.submitted && roomData.answers.B.submitted){renderResults();}}});
+}
+$("createBtn").addEventListener("click",async()=>{
+ const a=$("nameA").value.trim(),b=$("nameB").value.trim();
+ if(!a||!b){$("setupStatus").textContent="Please enter both names / രണ്ട് പേരുകളും നൽകുക.";return;}
+ $("createBtn").disabled=true;$("setupStatus").textContent="Creating your link…";
+ try{
+  await initFirebase(); roomKey=roomId();
+  roomData={nameA:a,nameB:b,duration:$("duration").value.trim(),createdAt:Date.now(),answers:{},version:1};
+  await set(ref(db,"rooms/"+roomKey),roomData);
+  history.replaceState({}, "", "?room="+roomKey);
+  await loadRoom(roomKey);
+ }catch(e){$("setupStatus").textContent=e.message;}
+ finally{$("createBtn").disabled=false;}
+});
+$("copyBtn").addEventListener("click",async()=>{try{await navigator.clipboard.writeText($("shareUrl").value);$("roomStatus").textContent="Link copied!";}catch{$("shareUrl").select();document.execCommand("copy");$("roomStatus").textContent="Link copied!";}});
+$("shareBtn").addEventListener("click",async()=>{const data={title:"Our Couple Connection Test",text:"Let's answer honestly and reveal our results together 💗",url:$("shareUrl").value};if(navigator.share){try{await navigator.share(data)}catch{}}else{await navigator.clipboard.writeText($("shareUrl").value);$("roomStatus").textContent="Link copied!";}});
+$("startBtn").addEventListener("click",async()=>{
+ participant=$("participant").value;if(!participant){$("roomStatus").textContent="Choose your name first.";return;}
+ if(roomData.answers?.[participant]?.submitted){$("roomStatus").textContent="This person has already submitted. Wait for both results.";return;}
+ answers=roomData.answers?.[participant]?.responses||{};qIndex=0;renderQuestion();show("quiz");
+});
+function renderQuestion(){
+ const q=questions[qIndex];$("whoPill").textContent=(participant==="A"?roomData.nameA:roomData.nameB)+" is answering";
+ $("counter").textContent=`Question ${qIndex+1} of ${questions.length}`;$("progressBar").style.width=((qIndex+1)/questions.length*100)+"%";
+ let html=`<div class="question">${escapeHtml(q.en)}<br><span class="muted" style="font-size:.96rem">${escapeHtml(q.ml)}</span></div>`;
+ if(q.type==="choice"){
+  html+='<div class="opts">'+q.opts.map((o,i)=>`<label class="opt"><input type="radio" name="answer" value="${i}" ${String(answers[qIndex]??"")===String(i)?"checked":""}><span>${escapeHtml(o)}</span></label>`).join("")+'</div>';
+ }else{
+  html+=`<textarea id="textAnswer" maxlength="1500" placeholder="${escapeHtml(q.placeholder)}">${escapeHtml(answers[qIndex]||"")}</textarea>`;
+ }
+ $("questionArea").innerHTML=html;$("backBtn").disabled=qIndex===0;$("nextBtn").textContent=qIndex===questions.length-1?"Submit answers · ഉത്തരങ്ങൾ സമർപ്പിക്കുക":"Next →";$("quizStatus").textContent="";
+}
+function captureAnswer(){
+ const q=questions[qIndex];
+ if(q.type==="choice"){const chosen=document.querySelector('input[name="answer"]:checked');if(!chosen)return false;answers[qIndex]=Number(chosen.value);}
+ else answers[qIndex]=$("textAnswer").value.trim();
+ return true;
+}
+$("nextBtn").addEventListener("click",async()=>{
+ if(!captureAnswer()){ $("quizStatus").textContent="Choose an answer to continue / ഉത്തരം തിരഞ്ഞെടുക്കുക.";return;}
+ if(qIndex<questions.length-1){qIndex++;renderQuestion();return;}
+ $("nextBtn").disabled=true;$("quizStatus").textContent="Saving answers…";
+ try{
+  const payload={responses:answers,submitted:true,submittedAt:Date.now()};
+  await set(ref(db,`rooms/${roomKey}/answers/${participant}`),payload);
+  roomData.answers=roomData.answers||{};roomData.answers[participant]=payload;
+  show("waiting");checkWaiting();
+ }catch(e){$("quizStatus").textContent="Could not save: "+e.message;}
+ finally{$("nextBtn").disabled=false;}
+});
+$("backBtn").addEventListener("click",()=>{if(qIndex>0){captureAnswer();qIndex--;renderQuestion();}});
+function checkWaiting(){
+ const a=roomData.answers?.A?.submitted,b=roomData.answers?.B?.submitted;
+ $("waitingStatus").textContent=a&&b?"Both have answered! Your report is ready. / രണ്ടുപേരും ഉത്തരം നൽകി.":"Waiting for your partner to finish… / partner-ന്റെ ഉത്തരങ്ങൾക്കായി കാത്തിരിക്കുന്നു.";
+ if(a&&b)renderResults();
+}
+$("refreshBtn").addEventListener("click",async()=>{try{const s=await get(ref(db,"rooms/"+roomKey));if(s.exists()){roomData=s.val();checkWaiting();}}catch(e){$("waitingStatus").textContent=e.message;}});
+function renderResults(){
+ if(!roomData?.answers?.A?.submitted||!roomData?.answers?.B?.submitted)return;
+ show("results");
+ const a=roomData.answers.A.responses||{},b=roomData.answers.B.responses||{};
+ let matched=0,total=0,detail="";
+ questions.forEach((q,i)=>{
+  const va=a[i],vb=b[i];
+  if(q.type==="choice"){total++;if(String(va)===String(vb))matched++;}
+  detail+=`<div class="answerbox"><h3>${i+1}. ${escapeHtml(q.en)}</h3><p class="muted">${escapeHtml(q.ml)}</p><p><b>${escapeHtml(roomData.nameA)}:</b> ${q.type==="choice"?escapeHtml(q.opts[va]??"No answer"):escapeHtml(va||"—")}</p><p><b>${escapeHtml(roomData.nameB)}:</b> ${q.type==="choice"?escapeHtml(q.opts[vb]??"No answer"):escapeHtml(vb||"—")}</p>${q.type==="choice"&&String(va)!==String(vb)?'<span class="pill">Talk about this difference · ഇതിനെക്കുറിച്ച് സംസാരിക്കുക</span>':''}</div>`;
+ });
+ $("alignScore").textContent=total?Math.round(matched/total*100)+"%":"—";
+ $("resultTitle").textContent=`${roomData.nameA} & ${roomData.nameB} 💗`;
+ $("resultDetails").innerHTML=detail;
+}
+$("copyReportBtn").addEventListener("click",async()=>{
+ const txt=[`${roomData.nameA} & ${roomData.nameB} — Couple Connection Report`,`Answer alignment: ${$("alignScore").textContent}`,...questions.map((q,i)=>`${i+1}. ${q.en}\n${roomData.nameA}: ${roomData.answers.A.responses?.[i]??"—"}\n${roomData.nameB}: ${roomData.answers.B.responses?.[i]??"—"}`)].join("\n\n");
+ try{await navigator.clipboard.writeText(txt);$("copyReportBtn").textContent="Report copied ✓";}catch{$("copyReportBtn").textContent="Copy unavailable";}
+});
+$("resetViewBtn").addEventListener("click",()=>show("room"));
+
+(async()=>{
+ if(!configured){$("setupStatus").textContent="Setup needed: configure Firebase first. Open README.md for step-by-step instructions.";return;}
+ try{await initFirebase();if(urlRoom){await loadRoom(urlRoom);}else show("setup");}
+ catch(e){$("setupStatus").textContent=e.message;}
+})();
+</script>
+</body>
+</html>
