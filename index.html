@@ -237,5 +237,28 @@ $("resetViewBtn").addEventListener("click",()=>show("room"));
   const app = initializeApp(firebaseConfig);
   const analytics = getAnalytics(app);
 </script>
+  <script type="module">
+  // Import the functions you need from the SDKs you need
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/13.0.0/firebase-app.js";
+  import { getAnalytics } from "https://www.gstatic.com/firebasejs/13.0.0/firebase-analytics.js";
+  // TODO: Add SDKs for Firebase products that you want to use
+  // https://firebase.google.com/docs/web/setup#available-libraries
+
+  // Your web app's Firebase configuration
+  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+  const firebaseConfig = {
+    apiKey: "AIzaSyAn6NTWGcNqUvrmc9bL7KgX5MU0-BseXn8",
+    authDomain: "heart-len-s-couple.firebaseapp.com",
+    projectId: "heart-len-s-couple",
+    storageBucket: "heart-len-s-couple.firebasestorage.app",
+    messagingSenderId: "97420817556",
+    appId: "1:97420817556:web:b94edf84fc2da8a0ebf081",
+    measurementId: "G-7MQP3KMLTP"
+  };
+
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig);
+  const analytics = getAnalytics(app);
+  </script>
 </body>
 </html>
